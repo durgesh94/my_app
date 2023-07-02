@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/quiz/answer_button.dart';
 import 'package:my_app/quiz/data/questions.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Questions extends StatefulWidget {
   const Questions({super.key});
@@ -12,9 +13,17 @@ class Questions extends StatefulWidget {
 }
 
 class _QuestionsState extends State<Questions> {
+  var currentQuestionIndex = 0;
+
+  void answerQuestion() {
+    setState(() {
+      currentQuestionIndex++;
+    });
+  }
+
   @override
   Widget build(context) {
-    final currentQuestion = questions[0];
+    final currentQuestion = questions[currentQuestionIndex];
 
     return SizedBox(
       width: double.infinity,
@@ -26,8 +35,10 @@ class _QuestionsState extends State<Questions> {
           children: [
             Text(
               currentQuestion.text,
-              style: const TextStyle(
+              style: GoogleFonts.lato(
                 color: Colors.black87,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
             ),
@@ -37,7 +48,7 @@ class _QuestionsState extends State<Questions> {
             ...currentQuestion.getShffledAnswers().map((ans) {
               return AnswerButton(
                 answerText: ans,
-                onTap: () {},
+                onTap: answerQuestion,
               );
             }),
           ],
