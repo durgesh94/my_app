@@ -4,9 +4,18 @@ import 'package:my_app/widgets/expenses.dart';
 var kColorScheme = ColorScheme.fromSeed(
   seedColor: const Color.fromARGB(255, 227, 141, 28),
 );
+
+var kDarkColorScheme = ColorScheme.fromSeed(
+  brightness: Brightness.dark,
+  seedColor: const Color.fromARGB(255, 225, 173, 105),
+);
 void main() {
   runApp(
     MaterialApp(
+      darkTheme: ThemeData.dark().copyWith(
+        useMaterial3: true,
+        colorScheme: kDarkColorScheme,
+      ),
       theme: ThemeData().copyWith(
           useMaterial3: true,
           colorScheme: kColorScheme,
@@ -33,6 +42,7 @@ void main() {
                 fontSize: 16,
               ))),
       home: const Expenses(),
+      // themeMode: ThemeMode.system, // default themeMode is system
     ),
   );
 }
